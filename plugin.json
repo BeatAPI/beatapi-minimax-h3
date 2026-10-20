@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "beatapi-minimax-h3",
+  "version": "0.1.0",
+  "description": "Create affordable videos from text and supported reference images with the full MiniMax H3 family. From $0.14 for 8 seconds at 480p. Connect your own BeatAPI key and confirm the price before generating.",
+  "author": {
+    "name": "BeatAPI",
+    "email": "support@beatapi.io",
+    "url": "https://beatapi.io"
+  },
+  "homepage": "https://beatapi.io/pricing",
+  "license": "MIT",
+  "keywords": [
+    "beatapi",
+    "grok-bot",
+    "minimax-h3",
+    "video"
+  ],
+  "repository": "https://github.com/BeatAPI/beatapi-minimax-h3"
+}

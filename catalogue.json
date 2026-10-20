@@ -1,0 +1,855 @@
+[
+  {
+    "reference": "model:minimax-h3-normal",
+    "kind": "model",
+    "id": "minimax-h3-normal",
+    "version": "1",
+    "status": "available",
+    "readiness": "ready",
+    "title": "MiniMax H3 Normal",
+    "description": "MiniMax H3 Normal generation capability",
+    "categories": [
+      "video"
+    ],
+    "tags": [
+      "video",
+      "generate"
+    ],
+    "input_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect_ratio": {
+          "default": "16:9",
+          "enum": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4",
+            "21:9"
+          ],
+          "type": "string"
+        },
+        "duration": {
+          "default": 5,
+          "maximum": 15,
+          "minimum": 5,
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array"
+        },
+        "model": {
+          "enum": [
+            "minimax-h3-normal"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "reference_images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference_videos": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array"
+        },
+        "resolution": {
+          "default": "768p",
+          "enum": [
+            "480p",
+            "480P",
+            "768p",
+            "768P",
+            "1080p",
+            "1080P"
+          ],
+          "type": "string"
+        },
+        "seed": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model",
+        "prompt"
+      ],
+      "type": "object",
+      "x-beatapi-rules": [
+        "images cannot be combined with reference inputs",
+        "Normal renders more slowly at half the Fast rate for the same resolution; only 480p, 768p and 1080p are available",
+        "reference mode accepts up to four images and one video; reference audio is not supported; generated videos include native audio"
+      ]
+    },
+    "output_schema": {
+      "delivery": "hosted_url",
+      "properties": {
+        "media": {
+          "description": "The hosted result assets, in output order.",
+          "items": {
+            "properties": {
+              "mime_type": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url",
+              "mime_type"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "r2_url": {
+          "deprecated": true,
+          "description": "Deprecated: read media[0].url. The primary asset's URL again — the video, else the first image, the same value as that media[].url — kept only for clients that read one URL.",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media"
+      ],
+      "type": "object"
+    },
+    "schema_hash": "3ef78dbed23bf245",
+    "execution": {
+      "mode": "async",
+      "status_supported": true,
+      "result_location": "task",
+      "executable": true,
+      "recommended": true
+    },
+    "pricing": {
+      "unit": "video",
+      "price_usd": "0.14",
+      "tiers": [
+        {
+          "id": "minimax-h3-normal-480p",
+          "spec": "8 sec · 480p",
+          "price_usd": "0.14"
+        },
+        {
+          "id": "minimax-h3-normal-768p",
+          "spec": "8 sec · 768p",
+          "price_usd": "0.16"
+        },
+        {
+          "id": "minimax-h3-normal-1080p",
+          "spec": "8 sec · 1080p",
+          "price_usd": "0.2"
+        }
+      ]
+    },
+    "versions": {
+      "catalog_version": "",
+      "contract_version": "1"
+    },
+    "validation": {
+      "state": "contract_tested",
+      "verified_at": "2026-09-14T00:00:00Z",
+      "evidence": [
+        "executable generation model contract"
+      ]
+    },
+    "price_key": "minimax-h3-normal"
+  },
+  {
+    "reference": "model:minimax-h3-max-turbo",
+    "kind": "model",
+    "id": "minimax-h3-max-turbo",
+    "version": "1",
+    "status": "available",
+    "readiness": "ready",
+    "title": "MiniMax H3 Max Turbo",
+    "description": "MiniMax H3 Max Turbo generation capability",
+    "categories": [
+      "video"
+    ],
+    "tags": [
+      "video",
+      "generate"
+    ],
+    "input_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "default": 5,
+          "minimum": 5,
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array"
+        },
+        "model": {
+          "enum": [
+            "minimax-h3-max-turbo"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "resolution": {
+          "default": "768P",
+          "enum": [
+            "480P",
+            "768P"
+          ],
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model",
+        "prompt"
+      ],
+      "type": "object"
+    },
+    "output_schema": {
+      "delivery": "hosted_url",
+      "properties": {
+        "media": {
+          "description": "The hosted result assets, in output order.",
+          "items": {
+            "properties": {
+              "mime_type": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url",
+              "mime_type"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "r2_url": {
+          "deprecated": true,
+          "description": "Deprecated: read media[0].url. The primary asset's URL again — the video, else the first image, the same value as that media[].url — kept only for clients that read one URL.",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media"
+      ],
+      "type": "object"
+    },
+    "schema_hash": "c71f13664882b61a",
+    "execution": {
+      "mode": "async",
+      "status_supported": true,
+      "result_location": "task",
+      "executable": true,
+      "recommended": true
+    },
+    "pricing": {
+      "unit": "video",
+      "price_usd": "0.2",
+      "tiers": [
+        {
+          "id": "minimax-h3-max-turbo-480p",
+          "spec": "8 sec · 480P",
+          "price_usd": "0.2"
+        },
+        {
+          "id": "minimax-h3-max-turbo-768p",
+          "spec": "8 sec · 768P",
+          "price_usd": "0.32"
+        }
+      ]
+    },
+    "versions": {
+      "catalog_version": "",
+      "contract_version": "1"
+    },
+    "validation": {
+      "state": "contract_tested",
+      "verified_at": "2026-09-14T00:00:00Z",
+      "evidence": [
+        "executable generation model contract"
+      ]
+    },
+    "price_key": "minimax-h3-max-turbo"
+  },
+  {
+    "reference": "model:minimax-h3",
+    "kind": "model",
+    "id": "minimax-h3",
+    "version": "1",
+    "status": "available",
+    "readiness": "ready",
+    "title": "MiniMax H3",
+    "description": "MiniMax H3 generation capability",
+    "categories": [
+      "video"
+    ],
+    "tags": [
+      "video",
+      "generate"
+    ],
+    "input_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect_ratio": {
+          "enum": [
+            "adaptive",
+            "21:9",
+            "16:9",
+            "4:3",
+            "1:1",
+            "3:4",
+            "9:16"
+          ],
+          "type": "string"
+        },
+        "duration": {
+          "default": 5,
+          "maximum": 15,
+          "minimum": 4,
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array"
+        },
+        "model": {
+          "enum": [
+            "minimax-h3"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "reference_audios": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference_images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 9,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference_videos": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "type": "array"
+        },
+        "resolution": {
+          "default": "768P",
+          "enum": [
+            "768p",
+            "768P",
+            "2K",
+            "2k"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "prompt"
+      ],
+      "type": "object",
+      "x-beatapi-rules": [
+        "images cannot be combined with reference inputs",
+        "Only 768P and 2K are available; both tiers accept the full H3 input contract"
+      ]
+    },
+    "output_schema": {
+      "delivery": "hosted_url",
+      "properties": {
+        "media": {
+          "description": "The hosted result assets, in output order.",
+          "items": {
+            "properties": {
+              "mime_type": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url",
+              "mime_type"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "r2_url": {
+          "deprecated": true,
+          "description": "Deprecated: read media[0].url. The primary asset's URL again — the video, else the first image, the same value as that media[].url — kept only for clients that read one URL.",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media"
+      ],
+      "type": "object"
+    },
+    "schema_hash": "ddd98aef47d94354",
+    "execution": {
+      "mode": "async",
+      "status_supported": true,
+      "result_location": "task",
+      "executable": true,
+      "recommended": true
+    },
+    "pricing": {
+      "unit": "video",
+      "price_usd": "0.32",
+      "tiers": [
+        {
+          "id": "minimax-h3-768p",
+          "spec": "8 sec · 768P",
+          "price_usd": "0.32"
+        },
+        {
+          "id": "minimax-h3-2k",
+          "spec": "8 sec · 2K",
+          "price_usd": "0.48"
+        }
+      ]
+    },
+    "versions": {
+      "catalog_version": "",
+      "contract_version": "1"
+    },
+    "validation": {
+      "state": "contract_tested",
+      "verified_at": "2026-09-14T00:00:00Z",
+      "evidence": [
+        "executable generation model contract"
+      ]
+    },
+    "price_key": "minimax-h3"
+  },
+  {
+    "reference": "model:minimax-h3-fast",
+    "kind": "model",
+    "id": "minimax-h3-fast",
+    "version": "1",
+    "status": "available",
+    "readiness": "ready",
+    "title": "MiniMax H3 Fast",
+    "description": "MiniMax H3 Fast generation capability",
+    "categories": [
+      "video"
+    ],
+    "tags": [
+      "video",
+      "generate"
+    ],
+    "input_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "aspect_ratio": {
+          "enum": [
+            "adaptive",
+            "21:9",
+            "16:9",
+            "4:3",
+            "1:1",
+            "3:4",
+            "9:16"
+          ],
+          "type": "string"
+        },
+        "duration": {
+          "default": 5,
+          "maximum": 15,
+          "minimum": 4,
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array"
+        },
+        "model": {
+          "enum": [
+            "minimax-h3-fast"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "reference_audios": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference_images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 9,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reference_videos": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "type": "array"
+        },
+        "resolution": {
+          "default": "768P",
+          "enum": [
+            "768p",
+            "768P",
+            "2K",
+            "2k"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "prompt"
+      ],
+      "type": "object",
+      "x-beatapi-rules": [
+        "images cannot be combined with reference inputs",
+        "Only 768P and 2K are available; both tiers accept the full H3 input contract"
+      ]
+    },
+    "output_schema": {
+      "delivery": "hosted_url",
+      "properties": {
+        "media": {
+          "description": "The hosted result assets, in output order.",
+          "items": {
+            "properties": {
+              "mime_type": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url",
+              "mime_type"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "r2_url": {
+          "deprecated": true,
+          "description": "Deprecated: read media[0].url. The primary asset's URL again — the video, else the first image, the same value as that media[].url — kept only for clients that read one URL.",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media"
+      ],
+      "type": "object"
+    },
+    "schema_hash": "8914bf986240077c",
+    "execution": {
+      "mode": "async",
+      "status_supported": true,
+      "result_location": "task",
+      "executable": true,
+      "recommended": true
+    },
+    "pricing": {
+      "unit": "video",
+      "price_usd": "0.32",
+      "tiers": [
+        {
+          "id": "minimax-h3-fast-768p",
+          "spec": "8 sec · 768P",
+          "price_usd": "0.32"
+        },
+        {
+          "id": "minimax-h3-fast-2k",
+          "spec": "8 sec · 2K",
+          "price_usd": "0.48"
+        }
+      ]
+    },
+    "versions": {
+      "catalog_version": "",
+      "contract_version": "1"
+    },
+    "validation": {
+      "state": "contract_tested",
+      "verified_at": "2026-09-14T00:00:00Z",
+      "evidence": [
+        "executable generation model contract"
+      ]
+    },
+    "price_key": "minimax-h3-fast"
+  },
+  {
+    "reference": "model:minimax-h3-max",
+    "kind": "model",
+    "id": "minimax-h3-max",
+    "version": "1",
+    "status": "available",
+    "readiness": "ready",
+    "title": "MiniMax H3 Max",
+    "description": "MiniMax H3 Max generation capability",
+    "categories": [
+      "video"
+    ],
+    "tags": [
+      "video",
+      "generate"
+    ],
+    "input_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "default": 5,
+          "minimum": 5,
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "format": "uri",
+            "pattern": "^https://",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array"
+        },
+        "model": {
+          "enum": [
+            "minimax-h3-max"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "resolution": {
+          "default": "768P",
+          "enum": [
+            "480P",
+            "768P"
+          ],
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model",
+        "prompt"
+      ],
+      "type": "object"
+    },
+    "output_schema": {
+      "delivery": "hosted_url",
+      "properties": {
+        "media": {
+          "description": "The hosted result assets, in output order.",
+          "items": {
+            "properties": {
+              "mime_type": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "video"
+                ],
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url",
+              "mime_type"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "r2_url": {
+          "deprecated": true,
+          "description": "Deprecated: read media[0].url. The primary asset's URL again — the video, else the first image, the same value as that media[].url — kept only for clients that read one URL.",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media"
+      ],
+      "type": "object"
+    },
+    "schema_hash": "f652d8aaa06d5ede",
+    "execution": {
+      "mode": "async",
+      "status_supported": true,
+      "result_location": "task",
+      "executable": true,
+      "recommended": true
+    },
+    "pricing": {
+      "unit": "video",
+      "price_usd": "0.4",
+      "tiers": [
+        {
+          "id": "minimax-h3-max-480p",
+          "spec": "8 sec · 480P",
+          "price_usd": "0.4"
+        },
+        {
+          "id": "minimax-h3-max-768p",
+          "spec": "8 sec · 768P",
+          "price_usd": "0.64"
+        }
+      ]
+    },
+    "versions": {
+      "catalog_version": "",
+      "contract_version": "1"
+    },
+    "validation": {
+      "state": "contract_tested",
+      "verified_at": "2026-09-14T00:00:00Z",
+      "evidence": [
+        "executable generation model contract"
+      ]
+    },
+    "price_key": "minimax-h3-max"
+  }
+]
